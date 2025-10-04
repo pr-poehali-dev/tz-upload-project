@@ -6,6 +6,7 @@ import { IncidentsModule } from '@/components/modules/IncidentsModule';
 import { TasksModule } from '@/components/modules/TasksModule';
 import { CatalogModule } from '@/components/modules/CatalogModule';
 import { ChecklistsModule } from '@/components/modules/ChecklistsModule';
+import { TenantsModule } from '@/components/modules/TenantsModule';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('dashboard');
@@ -80,6 +81,7 @@ const Dashboard = () => {
 
         <div className="p-8">
           {activeModule === 'dashboard' && <DashboardModule />}
+          {activeModule === 'tenants' && <TenantsModule />}
           {activeModule === 'incidents' && <IncidentsModule />}
           {activeModule === 'tasks' && <TasksModule />}
           {activeModule === 'catalog' && <CatalogModule />}
