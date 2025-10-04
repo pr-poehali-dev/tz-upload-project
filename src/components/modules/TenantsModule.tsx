@@ -10,11 +10,59 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Icon from '@/components/ui/icon';
 import { mockTenants } from '@/data/mockData';
+import { ExportMenu } from '@/components/ui/export-menu';
+import { exportToExcel, exportToPDF, exportToCSV } from '@/utils/exportUtils';
 
 export const TenantsModule = () => {
   const [isTenantModalOpen, setIsTenantModalOpen] = useState(false);
   const [selectedTenant, setSelectedTenant] = useState<any>(null);
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
+
+  const handleExportExcel = () => {
+    const data = mockTenants.map(tenant => ({
+      'ID': tenant.id,
+      'Организация': tenant.name,
+      'ИНН': tenant.inn,
+      'План': tenant.plan,
+      'Статус': tenant.status,
+      'Объекты': tenant.objectsCount,
+      'Пользователи': tenant.usersCount,
+      'Инциденты': tenant.incidentsCount,
+      'Контактное лицо': tenant.contactPerson,
+      'Email': tenant.contactEmail,
+      'Телефон': tenant.contactPhone,
+      'Создан': tenant.createdAt,
+      'Действует до': tenant.expiresAt,
+    }));
+    exportToExcel(data, 'Тенанты', 'Тенанты');
+  };
+
+  const handleExportPDF = () => {
+    const columns = [
+      { header: 'Организация', dataKey: 'name' },
+      { header: 'ИНН', dataKey: 'inn' },
+      { header: 'План', dataKey: 'plan' },
+      { header: 'Статус', dataKey: 'status' },
+      { header: 'Объекты', dataKey: 'objectsCount' },
+      { header: 'Пользователи', dataKey: 'usersCount' },
+      { header: 'Действует до', dataKey: 'expiresAt' },
+    ];
+    exportToPDF(mockTenants, columns, 'Тенанты', 'Отчет по тенантам');
+  };
+
+  const handleExportCSV = () => {
+    const data = mockTenants.map(tenant => ({
+      'ID': tenant.id,
+      'Организация': tenant.name,
+      'ИНН': tenant.inn,
+      'План': tenant.plan,
+      'Статус': tenant.status,
+      'Объекты': tenant.objectsCount,
+      'Пользователи': tenant.usersCount,
+      'Действует до': tenant.expiresAt,
+    }));
+    exportToCSV(data, 'Тенанты');
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -81,6 +129,11 @@ export const TenantsModule = () => {
               <Icon name="List" size={16} />
             </Button>
           </div>
+          <ExportMenu 
+            onExportExcel={handleExportExcel}
+            onExportPDF={handleExportPDF}
+            onExportCSV={handleExportCSV}
+          />
           <Dialog open={isTenantModalOpen} onOpenChange={setIsTenantModalOpen}>
             <DialogTrigger asChild>
               <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">

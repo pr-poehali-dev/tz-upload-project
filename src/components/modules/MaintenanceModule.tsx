@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Icon from '@/components/ui/icon';
+import { ExportMenu } from '@/components/ui/export-menu';
+import { createMaintenanceExport } from '@/utils/addExportToModules';
 
 const mockMaintenance = [
   { id: 1, object: 'ОПО-012 "Резервуарный парк"', type: 'Плановый ремонт', priority: 'Средний', status: 'В работе', plannedStart: '2024-10-15', plannedEnd: '2024-10-22', actualEnd: null, budget: 450000, spent: 180000, responsible: 'Иванов И.И.' },
@@ -20,6 +22,7 @@ const mockMaintenance = [
 export const MaintenanceModule = () => {
   const [isMaintenanceModalOpen, setIsMaintenanceModalOpen] = useState(false);
   const [selectedMaintenance, setSelectedMaintenance] = useState<any>(null);
+  const { handleExportExcel, handleExportPDF, handleExportCSV } = createMaintenanceExport(mockMaintenance);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -117,13 +120,19 @@ export const MaintenanceModule = () => {
             </SelectContent>
           </Select>
         </div>
-        <Dialog open={isMaintenanceModalOpen} onOpenChange={setIsMaintenanceModalOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
-              <Icon name="Plus" size={16} className="mr-2" />
-              Создать ремонт
-            </Button>
-          </DialogTrigger>
+        <div className="flex gap-3">
+          <ExportMenu 
+            onExportExcel={handleExportExcel}
+            onExportPDF={handleExportPDF}
+            onExportCSV={handleExportCSV}
+          />
+          <Dialog open={isMaintenanceModalOpen} onOpenChange={setIsMaintenanceModalOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
+                <Icon name="Plus" size={16} className="mr-2" />
+                Создать ремонт
+              </Button>
+            </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Планирование ремонта</DialogTitle>

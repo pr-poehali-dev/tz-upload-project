@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Icon from '@/components/ui/icon';
+import { ExportMenu } from '@/components/ui/export-menu';
+import { createDiagnosticsExport } from '@/utils/addExportToModules';
 
 const mockDiagnostics = [
   { id: 1, object: 'ОПО-012 "Резервуарный парк"', type: 'Техническая диагностика', date: '2024-09-15', nextDate: '2025-03-15', status: 'Выполнена', result: 'Удовлетворительно', defectsFound: 2 },
@@ -20,6 +22,7 @@ const mockDiagnostics = [
 export const DiagnosticsModule = () => {
   const [isDiagModalOpen, setIsDiagModalOpen] = useState(false);
   const [selectedDiag, setSelectedDiag] = useState<any>(null);
+  const { handleExportExcel, handleExportPDF, handleExportCSV } = createDiagnosticsExport(mockDiagnostics);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -103,7 +106,13 @@ export const DiagnosticsModule = () => {
             </SelectContent>
           </Select>
         </div>
-        <Dialog open={isDiagModalOpen} onOpenChange={setIsDiagModalOpen}>
+        <div className="flex gap-3">
+          <ExportMenu 
+            onExportExcel={handleExportExcel}
+            onExportPDF={handleExportPDF}
+            onExportCSV={handleExportCSV}
+          />
+          <Dialog open={isDiagModalOpen} onOpenChange={setIsDiagModalOpen}>
           <DialogTrigger asChild>
             <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
               <Icon name="Plus" size={16} className="mr-2" />

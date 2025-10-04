@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Icon from '@/components/ui/icon';
+import { ExportMenu } from '@/components/ui/export-menu';
+import { createUsersExport } from '@/utils/addExportToModules';
 
 const mockUsers = [
   { id: 1, name: 'Иванов Иван Иванович', email: 'ivanov@neftehim.ru', role: 'Администратор', tenant: 'ООО "Нефтехим"', status: 'Активен', lastLogin: '2024-10-05 14:32' },
@@ -19,6 +21,7 @@ const mockUsers = [
 export const UsersModule = () => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
+  const { handleExportExcel, handleExportPDF, handleExportCSV } = createUsersExport(mockUsers);
 
   const getRoleColor = (role: string) => {
     switch (role) {
@@ -103,7 +106,13 @@ export const UsersModule = () => {
             </SelectContent>
           </Select>
         </div>
-        <Dialog open={isUserModalOpen} onOpenChange={setIsUserModalOpen}>
+        <div className="flex gap-3">
+          <ExportMenu 
+            onExportExcel={handleExportExcel}
+            onExportPDF={handleExportPDF}
+            onExportCSV={handleExportCSV}
+          />
+          <Dialog open={isUserModalOpen} onOpenChange={setIsUserModalOpen}>
           <DialogTrigger asChild>
             <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
               <Icon name="Plus" size={16} className="mr-2" />

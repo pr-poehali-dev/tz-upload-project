@@ -11,9 +11,56 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import Icon from '@/components/ui/icon';
 import { mockIncidents } from '@/data/mockData';
 import { getPriorityColor, getStatusColor } from '@/utils/helpers';
+import { ExportMenu } from '@/components/ui/export-menu';
+import { exportToExcel, exportToPDF, exportToCSV } from '@/utils/exportUtils';
 
 export const IncidentsModule = () => {
   const [isIncidentModalOpen, setIsIncidentModalOpen] = useState(false);
+
+  const handleExportExcel = () => {
+    const data = mockIncidents.map(incident => ({
+      'ID': incident.id,
+      'Название': incident.title,
+      'Тип': incident.type,
+      'Приоритет': incident.priority,
+      'Объект': incident.object,
+      'Статус': incident.status,
+      'Ответственный': incident.responsible,
+      'Создан': incident.created,
+      'Срок': incident.deadline,
+    }));
+    exportToExcel(data, 'Инциденты', 'Инциденты');
+  };
+
+  const handleExportPDF = () => {
+    const columns = [
+      { header: 'ID', dataKey: 'id' },
+      { header: 'Название', dataKey: 'title' },
+      { header: 'Тип', dataKey: 'type' },
+      { header: 'Приоритет', dataKey: 'priority' },
+      { header: 'Объект', dataKey: 'object' },
+      { header: 'Статус', dataKey: 'status' },
+      { header: 'Ответственный', dataKey: 'responsible' },
+      { header: 'Создан', dataKey: 'created' },
+      { header: 'Срок', dataKey: 'deadline' },
+    ];
+    exportToPDF(mockIncidents, columns, 'Инциденты', 'Отчет по инцидентам');
+  };
+
+  const handleExportCSV = () => {
+    const data = mockIncidents.map(incident => ({
+      'ID': incident.id,
+      'Название': incident.title,
+      'Тип': incident.type,
+      'Приоритет': incident.priority,
+      'Объект': incident.object,
+      'Статус': incident.status,
+      'Ответственный': incident.responsible,
+      'Создан': incident.created,
+      'Срок': incident.deadline,
+    }));
+    exportToCSV(data, 'Инциденты');
+  };
 
   return (
     <div className="space-y-6">
@@ -33,13 +80,19 @@ export const IncidentsModule = () => {
             </SelectContent>
           </Select>
         </div>
-        <Dialog open={isIncidentModalOpen} onOpenChange={setIsIncidentModalOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
-              <Icon name="Plus" size={16} className="mr-2" />
-              Создать инцидент
-            </Button>
-          </DialogTrigger>
+        <div className="flex gap-3">
+          <ExportMenu 
+            onExportExcel={handleExportExcel}
+            onExportPDF={handleExportPDF}
+            onExportCSV={handleExportCSV}
+          />
+          <Dialog open={isIncidentModalOpen} onOpenChange={setIsIncidentModalOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
+                <Icon name="Plus" size={16} className="mr-2" />
+                Создать инцидент
+              </Button>
+            </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Создание инцидента</DialogTitle>

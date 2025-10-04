@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Icon from '@/components/ui/icon';
+import { ExportMenu } from '@/components/ui/export-menu';
+import { createCertificationExport } from '@/utils/addExportToModules';
 
 const mockCertifications = [
   { id: 1, employee: 'Иванов Иван Иванович', position: 'Инженер по ТБ', category: 'A.1', nextExam: '2025-03-15', status: 'Активна', organization: 'ООО "Нефтехим"' },
@@ -18,6 +20,7 @@ const mockCertifications = [
 
 export const CertificationModule = () => {
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
+  const { handleExportExcel, handleExportPDF, handleExportCSV } = createCertificationExport(mockCertifications);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -92,8 +95,14 @@ export const CertificationModule = () => {
             </SelectContent>
           </Select>
         </div>
-        <Dialog open={isCertModalOpen} onOpenChange={setIsCertModalOpen}>
-          <DialogTrigger asChild>
+        <div className="flex gap-3">
+          <ExportMenu 
+            onExportExcel={handleExportExcel}
+            onExportPDF={handleExportPDF}
+            onExportCSV={handleExportCSV}
+          />
+          <Dialog open={isCertModalOpen} onOpenChange={setIsCertModalOpen}>
+            <DialogTrigger asChild>
             <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
               <Icon name="Plus" size={16} className="mr-2" />
               Добавить аттестацию
