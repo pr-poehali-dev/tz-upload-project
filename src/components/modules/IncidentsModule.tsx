@@ -180,6 +180,7 @@ export const IncidentsModule = () => {
           </DialogContent>
         </Dialog>
       </div>
+      </div>
 
       <Card>
         <Table>

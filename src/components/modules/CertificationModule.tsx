@@ -172,6 +172,7 @@ export const CertificationModule = () => {
           </DialogContent>
         </Dialog>
       </div>
+      </div>
 
       <Card>
         <Table>

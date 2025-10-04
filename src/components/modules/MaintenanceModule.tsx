@@ -226,6 +226,7 @@ export const MaintenanceModule = () => {
           </DialogContent>
         </Dialog>
       </div>
+      </div>
 
       <Card>
         <Table>

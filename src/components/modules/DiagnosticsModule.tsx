@@ -176,6 +176,7 @@ export const DiagnosticsModule = () => {
           </DialogContent>
         </Dialog>
       </div>
+      </div>
 
       <Card>
         <Table>

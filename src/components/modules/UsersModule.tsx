@@ -196,6 +196,7 @@ export const UsersModule = () => {
           </DialogContent>
         </Dialog>
       </div>
+      </div>
 
       <Card>
         <Table>
