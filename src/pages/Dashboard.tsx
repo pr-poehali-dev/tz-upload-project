@@ -10,6 +10,9 @@ import { TenantsModule } from '@/components/modules/TenantsModule';
 import { CertificationModule } from '@/components/modules/CertificationModule';
 import { DiagnosticsModule } from '@/components/modules/DiagnosticsModule';
 import { MaintenanceModule } from '@/components/modules/MaintenanceModule';
+import { UsersModule } from '@/components/modules/UsersModule';
+import { ReportsModule } from '@/components/modules/ReportsModule';
+import { SettingsModule } from '@/components/modules/SettingsModule';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('dashboard');
@@ -24,6 +27,9 @@ const Dashboard = () => {
     { id: 'tasks', name: 'Задачи', icon: 'ListTodo' },
     { id: 'diagnostics', name: 'Диагностика', icon: 'Stethoscope' },
     { id: 'maintenance', name: 'Ремонты', icon: 'Wrench' },
+    { id: 'users', name: 'Пользователи', icon: 'Users' },
+    { id: 'reports', name: 'Отчеты', icon: 'FileText' },
+    { id: 'settings', name: 'Настройки', icon: 'Settings' },
   ];
 
   return (
@@ -75,7 +81,7 @@ const Dashboard = () => {
                 Управление промышленной безопасностью
               </p>
             </div>
-            <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
+            <Button className="bg-[#3B82F6] hover:bg-[#2563EB]" onClick={() => setActiveModule('settings')}>
               <Icon name="Settings" size={16} className="mr-2" />
               Настройки
             </Button>
@@ -92,6 +98,9 @@ const Dashboard = () => {
           {activeModule === 'tasks' && <TasksModule />}
           {activeModule === 'diagnostics' && <DiagnosticsModule />}
           {activeModule === 'maintenance' && <MaintenanceModule />}
+          {activeModule === 'users' && <UsersModule />}
+          {activeModule === 'reports' && <ReportsModule />}
+          {activeModule === 'settings' && <SettingsModule />}
         </div>
       </main>
     </div>
