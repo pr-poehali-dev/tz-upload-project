@@ -13,6 +13,10 @@ import { MaintenanceModule } from '@/components/modules/MaintenanceModule';
 import { UsersModule } from '@/components/modules/UsersModule';
 import { ReportsModule } from '@/components/modules/ReportsModule';
 import { SettingsModule } from '@/components/modules/SettingsModule';
+import { StaffingModule } from '@/components/modules/StaffingModule';
+import { EmployeesModule } from '@/components/modules/EmployeesModule';
+import { CertificatesListModule } from '@/components/modules/CertificatesListModule';
+import { TrainingScheduleModule } from '@/components/modules/TrainingScheduleModule';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('dashboard');
@@ -27,6 +31,10 @@ const Dashboard = () => {
     { id: 'tasks', name: 'Задачи', icon: 'ListTodo' },
     { id: 'diagnostics', name: 'Диагностика', icon: 'Stethoscope' },
     { id: 'maintenance', name: 'Ремонты', icon: 'Wrench' },
+    { id: 'staffing', name: 'Штатное расписание', icon: 'Briefcase' },
+    { id: 'employees', name: 'Сотрудники', icon: 'UserCheck' },
+    { id: 'certificates', name: 'Удостоверения', icon: 'FileCheck' },
+    { id: 'training', name: 'График обучения', icon: 'Calendar' },
     { id: 'users', name: 'Пользователи', icon: 'Users' },
     { id: 'reports', name: 'Отчеты', icon: 'FileText' },
     { id: 'settings', name: 'Настройки', icon: 'Settings' },
@@ -98,6 +106,10 @@ const Dashboard = () => {
           {activeModule === 'tasks' && <TasksModule />}
           {activeModule === 'diagnostics' && <DiagnosticsModule />}
           {activeModule === 'maintenance' && <MaintenanceModule />}
+          {activeModule === 'staffing' && <StaffingModule />}
+          {activeModule === 'employees' && <EmployeesModule />}
+          {activeModule === 'certificates' && <CertificatesListModule />}
+          {activeModule === 'training' && <TrainingScheduleModule />}
           {activeModule === 'users' && <UsersModule />}
           {activeModule === 'reports' && <ReportsModule />}
           {activeModule === 'settings' && <SettingsModule />}
