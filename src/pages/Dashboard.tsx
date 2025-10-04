@@ -7,6 +7,9 @@ import { TasksModule } from '@/components/modules/TasksModule';
 import { CatalogModule } from '@/components/modules/CatalogModule';
 import { ChecklistsModule } from '@/components/modules/ChecklistsModule';
 import { TenantsModule } from '@/components/modules/TenantsModule';
+import { CertificationModule } from '@/components/modules/CertificationModule';
+import { DiagnosticsModule } from '@/components/modules/DiagnosticsModule';
+import { MaintenanceModule } from '@/components/modules/MaintenanceModule';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('dashboard');
@@ -82,10 +85,13 @@ const Dashboard = () => {
         <div className="p-8">
           {activeModule === 'dashboard' && <DashboardModule />}
           {activeModule === 'tenants' && <TenantsModule />}
-          {activeModule === 'incidents' && <IncidentsModule />}
-          {activeModule === 'tasks' && <TasksModule />}
           {activeModule === 'catalog' && <CatalogModule />}
+          {activeModule === 'incidents' && <IncidentsModule />}
           {activeModule === 'checklists' && <ChecklistsModule />}
+          {activeModule === 'certification' && <CertificationModule />}
+          {activeModule === 'tasks' && <TasksModule />}
+          {activeModule === 'diagnostics' && <DiagnosticsModule />}
+          {activeModule === 'maintenance' && <MaintenanceModule />}
         </div>
       </main>
     </div>
