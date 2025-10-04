@@ -113,13 +113,13 @@ export const DiagnosticsModule = () => {
             onExportCSV={handleExportCSV}
           />
           <Dialog open={isDiagModalOpen} onOpenChange={setIsDiagModalOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
-              <Icon name="Plus" size={16} className="mr-2" />
-              Назначить диагностику
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+            <DialogTrigger asChild>
+              <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
+                <Icon name="Plus" size={16} className="mr-2" />
+                Назначить диагностику
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Назначение диагностики</DialogTitle>
             </DialogHeader>

@@ -103,12 +103,12 @@ export const CertificationModule = () => {
           />
           <Dialog open={isCertModalOpen} onOpenChange={setIsCertModalOpen}>
             <DialogTrigger asChild>
-            <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
-              <Icon name="Plus" size={16} className="mr-2" />
-              Добавить аттестацию
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+              <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
+                <Icon name="Plus" size={16} className="mr-2" />
+                Добавить аттестацию
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Регистрация аттестации</DialogTitle>
             </DialogHeader>

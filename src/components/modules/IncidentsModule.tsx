@@ -93,7 +93,7 @@ export const IncidentsModule = () => {
                 Создать инцидент
               </Button>
             </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+            <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Создание инцидента</DialogTitle>
             </DialogHeader>

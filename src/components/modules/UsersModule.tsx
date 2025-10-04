@@ -113,13 +113,13 @@ export const UsersModule = () => {
             onExportCSV={handleExportCSV}
           />
           <Dialog open={isUserModalOpen} onOpenChange={setIsUserModalOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
-              <Icon name="Plus" size={16} className="mr-2" />
-              Добавить пользователя
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+            <DialogTrigger asChild>
+              <Button className="bg-[#3B82F6] hover:bg-[#2563EB]">
+                <Icon name="Plus" size={16} className="mr-2" />
+                Добавить пользователя
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Создание пользователя</DialogTitle>
             </DialogHeader>

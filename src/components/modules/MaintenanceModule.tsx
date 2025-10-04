@@ -133,7 +133,7 @@ export const MaintenanceModule = () => {
                 Создать ремонт
               </Button>
             </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+            <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Планирование ремонта</DialogTitle>
             </DialogHeader>
